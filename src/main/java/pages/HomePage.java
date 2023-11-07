@@ -140,6 +140,8 @@ public class HomePage {
         return this;
     }
 
+
+
     public HomePage clickPriceBtn() {
         findElementPresence(driver, applyPriceBtn).click();
         try {
