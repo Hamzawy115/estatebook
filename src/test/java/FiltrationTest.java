@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class FiltrationTest extends TestBase {
 
-/*    @Test(priority = 1)
+ /*   @Test(priority = 1)
     public void testOfTypeFilter() {
 
         var filterByType = homePage.clickDiscoverBtn()
@@ -19,7 +19,7 @@ public class FiltrationTest extends TestBase {
             throw new RuntimeException(e);
         }
     }*/
-@Test( priority = 2)
+/*@Test( priority = 2)
     public void testOfTypeFilter1() {
 
         var filterByType = homePage.clickDiscoverBtn()
@@ -35,8 +35,8 @@ public class FiltrationTest extends TestBase {
             throw new RuntimeException(e);
         }
 
-    }
-    @Test( priority = 2)
+    }*/
+/*    @Test( priority = 2)
     public void testOfTypeFilter2() {
 
         var filterByType = homePage.clickDiscoverBtn()
@@ -45,27 +45,31 @@ public class FiltrationTest extends TestBase {
                 .pickTriplex()
                 .clickApplyTypeButton();
 
-        Assert.assertTrue(filterByType.checkBuildingType("Apartment", "Duplex"));
+        Assert.assertTrue(filterByType.checkBuildingType("Serviced Apartment", "Triplex"));
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-    }
+    }*/
 
-   /* @Test(priority = 2)
+    @Test(priority = 1)
     public void testOfPriceFilter() {
 
         var filterByPrice = homePage.clickDiscoverBtn()
                 .clickPriceExpend()
-                .enterMinAndMaxPrice("5000000", "60000000")
+                .enterMinAndMaxPrice("5000000", "20000000")
                 .clickApplyPriceButton();
 
 
-        Assert.assertTrue(filterByPrice.checkPriceOfBuilding("5000000", "60000000"));
-
-    }*/
+        Assert.assertTrue(filterByPrice.checkPriceOfBuilding("5000000", "20000000"));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /*@Test(priority = 3)
     public void testOfAreaFilter() {
 

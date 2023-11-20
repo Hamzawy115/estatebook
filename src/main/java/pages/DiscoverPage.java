@@ -52,11 +52,10 @@ public class DiscoverPage {
 
     // --------------------- locators of type & price filters ---------------------
 
-
     private final By typeOfBuildingText = By.xpath("//p[contains(@class, 'text-primary-green')]");
+    //private final By priceOfBuildingText = By.xpath("//h2[contains(@class, 'line-clamp-1 space-x-1 text-lg font-bold')]");
+    private final By priceOfBuildingText = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[1]/div/div/p");
 
-    //private  final By priceOfBuildingText = By.xpath("//h2[contains(@class, 'line-clamp-1 space-x-1 text-lg font-bold')]");
-    private final By priceOfBuildingText = By.xpath("//h2[contains(@class, 'line-clamp-1 space-x-1 text-lg font-bold')]");
     private final By areaLocate = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[2]/div/div/div[3]/p/span[1]");
 
     // --------------------- loop on all discover list ---------------------
@@ -119,18 +118,14 @@ public class DiscoverPage {
         boolean buildingText = false;
         List<WebElement> returnedList = driver.findElements(elementName);
 
-        for (int i = 0; i < returnedList.size(); i++) {
-            // Get the text from the web element
-            String webElementText = returnedList.get(i).getText();
+        for (WebElement webElement : returnedList) {
+            String webElementText = webElement.getText();
 
-            // Remove non-numeric characters from the text
             String numericString = webElementText.replaceAll("[^\\d]", "");
 
             try {
-                // Convert the cleaned string to an integer
                 int webElementType = Integer.parseInt(numericString);
 
-                // Check the condition
                 if (webElementType >= firstInput && webElementType <= secondInput) {
                     buildingText = true;
                 } else {
@@ -138,7 +133,6 @@ public class DiscoverPage {
                     break;
                 }
             } catch (NumberFormatException e) {
-                // Handle the exception if parsing fails
                 System.err.println("Error parsing integer: " + e.getMessage());
                 buildingText = false;
                 break;
@@ -147,6 +141,8 @@ public class DiscoverPage {
 
         return buildingText;
     }
+
+
 
   /*  public boolean checkSearchResultsInt1(By elementName, int firstInput, int secondInput) {
         boolean buildingText = false;
@@ -190,13 +186,7 @@ public class DiscoverPage {
     }
 
     public boolean checkPriceOfBuilding(String fromPrice, String toPrice) {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
-        // return checkSearchResultsInt(priceOfBuildingText, Integer.parseInt(fromPrice.replaceAll("[^\\d.]", ""))  ,Integer.parseInt(toPrice.replaceAll("[^\\d.]", "")));
         return checkSearchResultsInt(priceOfBuildingText, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
 
     }
