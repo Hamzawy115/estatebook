@@ -58,6 +58,7 @@ public class DiscoverPage {
     //private  final By priceOfBuildingText = By.xpath("//h2[contains(@class, 'line-clamp-1 space-x-1 text-lg font-bold')]");
     private final By priceOfBuildingText = By.xpath("//h2[contains(@class, 'line-clamp-1 space-x-1 text-lg font-bold')]");
     private final By areaLocate = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[2]/div/div/div[3]/p/span[1]");
+
     // --------------------- loop on all discover list ---------------------
     public boolean checkSearchResults(By elementName, String firstInput, String secondInput) {
         boolean buildingText = false;
@@ -66,6 +67,25 @@ public class DiscoverPage {
             String webElementType = reterndList.get(i).getText();
             if (webElementType.equalsIgnoreCase(firstInput)
                     || webElementType.equalsIgnoreCase(secondInput)) {
+
+                buildingText = true;
+            } else {
+                buildingText = false;
+                break;
+            }
+
+        }
+        System.out.println("No. of returned unites : " + reterndList.size());
+        return buildingText;
+    }
+
+    public boolean checkSearchResultsSingle(By elementName, String firstInput) {
+        boolean buildingText = false;
+        List<WebElement> reterndList = driver.findElements(elementName);
+        for (int i = 0; i < reterndList.size(); i++) {
+            String webElementType = reterndList.get(i).getText();
+            if (webElementType.equalsIgnoreCase(firstInput)
+            ) {
 
                 buildingText = true;
             } else {
@@ -165,6 +185,10 @@ public class DiscoverPage {
         return checkSearchResults(typeOfBuildingText, buildingType1, buildingType2);
     }
 
+    public boolean checkBuildingTypeSingle(String buildingType1) {
+        return checkSearchResultsSingle(typeOfBuildingText, buildingType1);
+    }
+
     public boolean checkPriceOfBuilding(String fromPrice, String toPrice) {
         try {
             Thread.sleep(5000);
@@ -207,8 +231,24 @@ public class DiscoverPage {
         return this;
     }
 
+    public DiscoverPage pickLoft() {
+        pickFilterTypeOption(6).click();
+        return this;
+    }
+
     public DiscoverPage pickApartment() {
         pickFilterTypeOption(7).click();
+        return this;
+    }
+
+    public DiscoverPage pickCabin() {
+        pickFilterTypeOption(8).click();
+        return this;
+    }
+
+
+    public DiscoverPage pickStudio() {
+        pickFilterTypeOption(9).click();
         return this;
     }
 
@@ -216,6 +256,17 @@ public class DiscoverPage {
         pickFilterTypeOption(10).click();
         return this;
     }
+
+    public DiscoverPage pickPenthouse() {
+        pickFilterTypeOption(11).click();
+        return this;
+    }
+
+    public DiscoverPage pickTwinHouse() {
+        pickFilterTypeOption(13).click();
+        return this;
+    }
+
 
     public DiscoverPage clickApplyTypeButton() {
         findElementPresence(driver, applyFilterTypeBtn).click();
