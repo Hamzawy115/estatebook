@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 public class FiltrationTest extends TestBase {
 
- /*   @Test(priority = 1)
+   @Test(priority = 1)
     public void testOfTypeFilter() {
 
         var filterByType = homePage.clickDiscoverBtn()
@@ -18,8 +18,8 @@ public class FiltrationTest extends TestBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }*/
-/*@Test( priority = 2)
+    }
+@Test( priority = 2)
     public void testOfTypeFilter1() {
 
         var filterByType = homePage.clickDiscoverBtn()
@@ -35,8 +35,8 @@ public class FiltrationTest extends TestBase {
             throw new RuntimeException(e);
         }
 
-    }*/
-/* @Test(priority = 2)
+    }
+ @Test(priority = 3)
  public void testOfTypeFilter2() {
 
      var filterByType = homePage.clickDiscoverBtn()
@@ -51,9 +51,9 @@ public class FiltrationTest extends TestBase {
      } catch (InterruptedException e) {
          throw new RuntimeException(e);
      }
- }*/
+ }
 
-    @Test(priority = 1)
+    @Test(priority = 4)
     public void testOfPriceFilter() {
 
         var filterByPrice = homePage.clickDiscoverBtn()
