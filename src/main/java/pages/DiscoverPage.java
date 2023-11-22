@@ -51,12 +51,13 @@ public class DiscoverPage {
     private final By applyPriceBtn = By.xpath("//button[contains(@class,'500 bg-primary')]");
 
     // --------------------- locators of type & price filters ---------------------
-
     private final By typeOfBuildingText = By.xpath("//p[contains(@class, 'text-primary-green')]");
     //private final By priceOfBuildingText = By.xpath("//h2[contains(@class, 'line-clamp-1 space-x-1 text-lg font-bold')]");
     private final By priceOfBuildingText = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[1]/div/div/p");
 
     private final By areaLocate = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[2]/div/div/div[3]/p/span[1]");
+    private final By sortButton = By.xpath("//button[contains(@class,'inline-flex h-full items-center     justify-')]");
+    private final By sortSelectortype = By.xpath("//div[contains(@class,'px-1 py-1 ')]");
 
     // --------------------- loop on all discover list ---------------------
     public boolean checkSearchResults(By elementName, String firstInput, String secondInput) {
@@ -91,12 +92,10 @@ public class DiscoverPage {
                 buildingText = false;
                 break;
             }
-
         }
         System.out.println("No. of returned unites : " + reterndList.size());
         return buildingText;
     }
-
 
     public boolean checkSearchResultsInt1(By elementName, int firstInput, int secondInput) {
         boolean buildingText = false;
@@ -268,8 +267,37 @@ public class DiscoverPage {
         return this;
     }
 
+    public DiscoverPage pickPriceLowToHigh() {
+        pickSortTypeOption(2).click();
+        return this;
+    }
+
+    public DiscoverPage pickPriceHighToLow() {
+        pickSortTypeOption(3).click();
+        return this;
+    }
+
+    public DiscoverPage pickDownPaymentLowToHigh() {
+        pickSortTypeOption(4).click();
+        return this;
+    }
+
+    public DiscoverPage pickDownPaymentHighToLow() {
+        pickSortTypeOption(5).click();
+        return this;
+    }
+
+    public DiscoverPage clickSortButton() {
+        findElementPresence(driver, sortButton).click();
+        return this;
+    }
+
     private WebElement pickFilterTypeOption(int filterTypeIndex) {
         return findElementPresence(driver, By.xpath("//li[contains(@class,'text-xs')][contains(@role,'none')]" + "[" + filterTypeIndex + "]"));
+    }
+
+    private WebElement pickSortTypeOption(int sortTypeIndex) {
+        return findElementPresence(driver, By.xpath("//div[contains(@class,'px-1 py-1 ')]" + "[" + sortTypeIndex + "]"));
     }
 
 
@@ -304,12 +332,9 @@ public class DiscoverPage {
         return this;
     }
 
-
     public DiscoverPage fillMaxAreaField(String maxArea) {
 //        findElement(minAndMaxAreaFields,1).sendKeys(Keys.chord(Keys.CONTROL,Keys.chord("a",Keys.BACK_SPACE)));
 //        findElement(minAndMaxAreaFields,1).sendKeys("500");
-
-
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].value = '" + maxArea + "';", findDuplicationIndex(driver, minAndMaxAreaFields, 1));
 
@@ -321,11 +346,8 @@ public class DiscoverPage {
         return this;
     }
 
-
     public DiscoverPage enterMinAndMaxArea(String minArea, String maxArea) {
-        // findDuplicationIndex(driver, minAndMaxAreaFields, 0).clear();
         findDuplicationIndex(driver, minAndMaxAreaFields, 0).sendKeys(minArea);
-        // findDuplicationIndex(driver, minAndMaxAreaFields, 1).clear();
         findDuplicationIndex(driver, minAndMaxAreaFields, 1).sendKeys(maxArea);
         return this;
 

@@ -22,7 +22,7 @@ public class FiltrationTest extends TestBase {
 @Test( priority = 2)
     public void testOfTypeFilter1() {
 
-        var filterByType = homePage.clickDiscoverBtn()
+         var filterByType = homePage.clickDiscoverBtn()
                 .clickTypeExpend()
                 .pickServicedApartment()
                 .pickTriplex()
