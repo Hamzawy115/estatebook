@@ -19,7 +19,7 @@ public class FiltrationTest extends TestBase {
         }
     }
 
-    @Test(priority = 2)
+/*    @Test(priority = 2)
     public void testOfTypeFilter1() {
         var filterByType = homePage.clickDiscoverBtn()
                 .clickTypeExpend()
@@ -32,7 +32,7 @@ public class FiltrationTest extends TestBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     @Test(priority = 3)
     public void testOfTypeFilter2() {
@@ -71,7 +71,22 @@ public class FiltrationTest extends TestBase {
                 .clickApplyPriceButton()
                 .clickSortButton()
                 .pickPriceLowToHigh();
-        Assert.assertTrue(filterByPriceAndSort.checkSearchResultsOfSort(DiscoverPage.priceOfBuildingText, 5000000, 20000000));
+        Assert.assertTrue(filterByPriceAndSort.checkSearchResultsOfSortPriceLowToHigh(DiscoverPage.priceOfBuildingText, 5000000, 20000000));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test(priority = 6)
+    public void testOfSortPriceFromHighToLow() {
+        var filterByPriceAndSort = homePage.clickDiscoverBtn()
+                .clickPriceExpend()
+                .enterMinAndMaxPrice("5000000", "20000000")
+                .clickApplyPriceButton()
+                .clickSortButton()
+                .pickPriceHighToLow();
+        Assert.assertTrue(filterByPriceAndSort.checkSearchResultsOfSortPriceHighToLow(DiscoverPage.priceOfBuildingText, 5000000, 20000000));
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {

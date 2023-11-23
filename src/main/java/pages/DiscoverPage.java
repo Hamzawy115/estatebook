@@ -112,7 +112,7 @@ public class DiscoverPage {
         return buildingText;
     }
 
-    public boolean checkSearchResultsOfSort(By elementName, int firstInput, int secondInput) {
+    public boolean checkSearchResultsOfSortPriceLowToHigh(By elementName, int firstInput, int secondInput) {
         boolean buildingText = false;
         int previousValue = Integer.MIN_VALUE; // Initialize with the smallest possible value
 
@@ -127,6 +127,41 @@ public class DiscoverPage {
                 if (webElementType >= firstInput && webElementType <= secondInput) {
                     // Check if the current value is greater than or equal to the previous one
                     if (webElementType >= previousValue) {
+                        buildingText = true;
+                    } else {
+                        buildingText = false;
+                        break;
+                    }
+
+                    // Update the previous value for the next iteration
+                    previousValue = webElementType;
+                } else {
+                    buildingText = false;
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Error parsing integer: " + e.getMessage());
+                buildingText = false;
+                break;
+            }
+        }
+        return buildingText;
+    }
+    public boolean checkSearchResultsOfSortPriceHighToLow(By elementName, int firstInput, int secondInput) {
+        boolean buildingText = false;
+        int previousValue = Integer.MAX_VALUE; // Initialize with the largest possible value
+
+        List<WebElement> returnedList = driver.findElements(elementName);
+        for (WebElement webElement : returnedList) {
+            String webElementText = webElement.getText();
+            String numericString = webElementText.replaceAll("[^\\d]", "");
+            try {
+                int webElementType = Integer.parseInt(numericString);
+
+                // Check if the current value is within the specified range
+                if (webElementType >= firstInput && webElementType <= secondInput) {
+                    // Check if the current value is less than or equal to the previous one
+                    if (webElementType <= previousValue) {
                         buildingText = true;
                     } else {
                         buildingText = false;
