@@ -36,9 +36,8 @@ public class DiscoverPage {
     public static By priceOfBuildingText = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[1]/div/div/p");
     private final By areaLocate = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[2]/div/div/div[3]/p/span[1]");
     private final By sortButton = By.xpath("//button[contains(@class,'inline-flex h-full items-center     justify-')]");
-    public static By sortSelectortype = By.xpath("//div[contains(@class,'px-1 py-1 ')]");
-    private final By DownPayment = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[2]/div/div/p");
-
+    public static final By sortSelectortype = By.xpath("//div[contains(@class,'px-1 py-1 ')]");
+    public static final By DownPayment = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[2]/div/div/p");
     // --------------------- loop on all discover list ---------------------
     public boolean checkSearchResults(By elementName, String firstInput, String secondInput) {
         boolean buildingText = false;
@@ -147,6 +146,7 @@ public class DiscoverPage {
         }
         return buildingText;
     }
+
     public boolean checkSearchResultsOfSortPriceHighToLow(By elementName, int firstInput, int secondInput) {
         boolean buildingText = false;
         int previousValue = Integer.MAX_VALUE; // Initialize with the largest possible value
@@ -222,7 +222,9 @@ public class DiscoverPage {
     public boolean checkPriceOfBuilding(String fromPrice, String toPrice) {
         return checkSearchResultsInt(priceOfBuildingText, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
     }
-
+    public boolean checkDownPayment(String fromPrice, String toPrice) {
+        return checkSearchResultsInt(DownPayment, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
+    }
     public boolean checkAreaOfBuilding(String fromArea, String toArea) {
         try {
             Thread.sleep(5000);
