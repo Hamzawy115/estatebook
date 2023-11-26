@@ -29,6 +29,8 @@ public class DiscoverPage {
     // --------------------- locators of price filter ---------------------
     private final By priceExpandBtn = By.xpath("//button[contains(@class,'rounded-md p-4')]");
     private final By minAndMaxPriceFields = By.xpath("//input[contains(@class,'pointer-events-auto')]");
+    private final By downpayment = By.xpath("/html/body/main/div/div[1]/div[5]/div/div/div/div[2]/div/div[1]/div[1]/button[2]");
+    private final By minAndMaxDownPaymentFields = By.xpath("//input[contains(@class,'pointer-events-auto')]");
     private final By applyPriceBtn = By.xpath("//button[contains(@class,'500 bg-primary')]");
     // --------------------- locators of type & price filters ---------------------
     private final By typeOfBuildingText = By.xpath("//p[contains(@class, 'text-primary-green')]");
@@ -38,6 +40,7 @@ public class DiscoverPage {
     private final By sortButton = By.xpath("//button[contains(@class,'inline-flex h-full items-center     justify-')]");
     public static final By sortSelectortype = By.xpath("//div[contains(@class,'px-1 py-1 ')]");
     public static final By DownPayment = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[2]/div/div/p");
+
     // --------------------- loop on all discover list ---------------------
     public boolean checkSearchResults(By elementName, String firstInput, String secondInput) {
         boolean buildingText = false;
@@ -222,9 +225,11 @@ public class DiscoverPage {
     public boolean checkPriceOfBuilding(String fromPrice, String toPrice) {
         return checkSearchResultsInt(priceOfBuildingText, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
     }
+
     public boolean checkDownPayment(String fromPrice, String toPrice) {
         return checkSearchResultsInt(DownPayment, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
     }
+
     public boolean checkAreaOfBuilding(String fromArea, String toArea) {
         try {
             Thread.sleep(5000);
@@ -237,6 +242,11 @@ public class DiscoverPage {
     // --------------------- Actions of type filter ---------------------
     public DiscoverPage clickTypeExpend() {
         findDuplicationIndex(driver, typeExpandBtn, 0).click();
+        return this;
+    }
+
+    public DiscoverPage clickDownPayment() {
+        findElementPresence(driver, downpayment).click();
         return this;
     }
 
@@ -366,6 +376,7 @@ public class DiscoverPage {
         return this;
     }
 
+
     public DiscoverPage enterMinAndMaxArea(String minArea, String maxArea) {
         findDuplicationIndex(driver, minAndMaxAreaFields, 0).sendKeys(minArea);
         findDuplicationIndex(driver, minAndMaxAreaFields, 1).sendKeys(maxArea);
@@ -407,6 +418,12 @@ public class DiscoverPage {
     public DiscoverPage enterMinAndMaxPrice(String minPrice, String maxPrice) {
         findDuplicationIndex(driver, minAndMaxPriceFields, 0).sendKeys(minPrice, Keys.ENTER);
         findDuplicationIndex(driver, minAndMaxPriceFields, 1).sendKeys(maxPrice, Keys.ENTER);
+        return this;
+    }
+
+    public DiscoverPage enterMinAndMaxDownPayment(String minDownPayment, String maxDownPayment) {
+        findDuplicationIndex(driver, minAndMaxDownPaymentFields, 0).sendKeys(minDownPayment, Keys.ENTER);
+        findDuplicationIndex(driver, minAndMaxDownPaymentFields, 1).sendKeys(maxDownPayment, Keys.ENTER);
         return this;
     }
 

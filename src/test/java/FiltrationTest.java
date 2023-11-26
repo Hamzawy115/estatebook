@@ -78,6 +78,7 @@ public class FiltrationTest extends TestBase {
             throw new RuntimeException(e);
         }
     }
+
     @Test(priority = 6)
     public void testOfSortPriceFromHighToLow() {
         var filterByPriceAndSort = homePage.clickDiscoverBtn()
@@ -87,6 +88,35 @@ public class FiltrationTest extends TestBase {
                 .clickSortButton()
                 .pickPriceHighToLow();
         Assert.assertTrue(filterByPriceAndSort.checkSearchResultsOfSortPriceHighToLow(DiscoverPage.priceOfBuildingText, 5000000, 20000000));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void testOfSortDownPaymentFromHighToLow() {
+        var filterByPriceAndSort = homePage.clickDiscoverBtn()
+                .clickPriceExpend()
+                .enterMinAndMaxPrice("5000000", "20000000")
+                .clickApplyPriceButton()
+                .clickSortButton()
+                .pickPriceHighToLow();
+        Assert.assertTrue(filterByPriceAndSort.checkSearchResultsOfSortPriceHighToLow(DiscoverPage.priceOfBuildingText, 5000000, 20000000));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void testOfDownPayment() {
+        var filterDownPayment = homePage.clickDiscoverBtn()
+                .clickPriceExpend()
+                .clickDownPayment()
+                .enterMinAndMaxDownPayment("100000", "300000")
+                .clickApplyPriceButton();
+        Assert.assertTrue(filterDownPayment.checkPriceOfBuilding("100000", "300000"));
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
