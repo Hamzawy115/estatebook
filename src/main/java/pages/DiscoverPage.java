@@ -30,6 +30,7 @@ public class DiscoverPage {
     private final By priceExpandBtn = By.xpath("//button[contains(@class,'rounded-md p-4')]");
     private final By minAndMaxPriceFields = By.xpath("//input[contains(@class,'pointer-events-auto')]");
     private final By downpayment = By.xpath("/html/body/main/div/div[1]/div[5]/div/div/div/div[2]/div/div[1]/div[1]/button[2]");
+    public static By getDownPaymenText = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[2]/div/div/p");
     private final By minAndMaxDownPaymentFields = By.xpath("//input[contains(@class,'pointer-events-auto')]");
     private final By applyPriceBtn = By.xpath("//button[contains(@class,'500 bg-primary')]");
     // --------------------- locators of type & price filters ---------------------

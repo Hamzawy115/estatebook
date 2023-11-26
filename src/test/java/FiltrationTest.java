@@ -95,6 +95,8 @@ public class FiltrationTest extends TestBase {
         }
     }
 
+    @Test(priority = 7)
+
     public void testOfSortDownPaymentFromHighToLow() {
         var filterByPriceAndSort = homePage.clickDiscoverBtn()
                 .clickPriceExpend()
@@ -110,13 +112,15 @@ public class FiltrationTest extends TestBase {
         }
     }
 
+    @Test(priority = 8)
+
     public void testOfDownPayment() {
         var filterDownPayment = homePage.clickDiscoverBtn()
                 .clickPriceExpend()
                 .clickDownPayment()
                 .enterMinAndMaxDownPayment("100000", "300000")
                 .clickApplyPriceButton();
-        Assert.assertTrue(filterDownPayment.checkPriceOfBuilding("100000", "300000"));
+        Assert.assertTrue(filterDownPayment.checkSearchResultsInt(DiscoverPage.getDownPaymenText, 100000, 300000));
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -124,6 +128,39 @@ public class FiltrationTest extends TestBase {
         }
     }
 
+    @Test(priority = 9)
+    public void testOfSortDownpaymentFromLowToHigh() {
+        var filterByDownPaymentAndSort = homePage.clickDiscoverBtn()
+                .clickPriceExpend()
+                .clickDownPayment()
+                .enterMinAndMaxDownPayment("100000", "300000")
+                .clickApplyPriceButton()
+                .clickSortButton()
+                .pickDownPaymentLowToHigh();
+        Assert.assertTrue(filterByDownPaymentAndSort.checkSearchResultsOfSortPriceLowToHigh(DiscoverPage.getDownPaymenText, 100000, 300000));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test(priority = 10)
+    public void testOfSortDownpaymentFromHighToLow() {
+        var filterByDownPaymentAndSort = homePage.clickDiscoverBtn()
+                .clickPriceExpend()
+                .clickDownPayment()
+                .enterMinAndMaxDownPayment("100000", "300000")
+                .clickApplyPriceButton()
+                .clickSortButton()
+                .pickDownPaymentHighToLow();
+        Assert.assertTrue(filterByDownPaymentAndSort.checkSearchResultsOfSortPriceHighToLow(DiscoverPage.getDownPaymenText, 100000, 300000));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /*@Test(priority = 3)
     public void testOfAreaFilter() {
         var filterByPrice = homePage.clickDiscoverBtn()
