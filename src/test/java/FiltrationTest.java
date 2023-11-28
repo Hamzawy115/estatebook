@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.DiscoverPage;
+import pages.HomePage;
 
 public class FiltrationTest extends TestBase {
     @Test(priority = 1)
@@ -160,6 +161,10 @@ public class FiltrationTest extends TestBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Test(priority = 11)
+    public void logIn(){
+        homePage.clickLoginBtn().enterEmail().enterPassword().clickSubmitBtn();
     }
     /*@Test(priority = 3)
     public void testOfAreaFilter() {

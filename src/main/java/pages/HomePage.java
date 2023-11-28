@@ -1,16 +1,20 @@
 package pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import static utils.CustomMethods.*;
+
 public class HomePage {
     private WebDriver driver;
-    public HomePage(WebDriver driver){
-       this.driver = driver;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
     }
+
     // --------------------- filter by type ---------------------
-    private  final By typeOfBuildingBtn = By.xpath("//div[1]/div[2]/div[1]//div[2]//div[2]/div/div[3]/div[1]");
+    private final By typeOfBuildingBtn = By.xpath("//div[1]/div[2]/div[1]//div[2]//div[2]/div/div[3]/div[1]");
     private final By servicedApartment = By.xpath("//div[contains(@class,'tabs_')][1]//div[contains(@class,'rounded-lg')][1]");
     private final By triplexBtn = By.xpath("//div[contains(@class,'tabs_')][1]//div[contains(@class,'rounded-lg')][2]");
     private final By chaletBtn = By.xpath("//div[contains(@class,'tabs_')][1]//div[contains(@class,'rounded-lg')][3]");
@@ -35,28 +39,79 @@ public class HomePage {
     private final By searchBar = By.xpath("//div[1]//div/div[2]/div/input");
     private final By searchIconBtn = By.xpath("//div[1]/div[2]/div[1]//div[2]//div[2]/div/div[5]/div[2]");
     private final By discoverPageBtn = By.xpath("//a[@href='/discover']");
-// --------------------- Type Filtration ---------------------
+    private final By loginBtn = By.xpath("/html/body/header/div/div[2]/div[1]/button");
+    private final By emailInput = By.xpath("/html/body/div[5]/div/div/div[2]/div/form/div[1]/div/input");
+    private final By passwordInput = By.xpath("/html/body/div[5]/div/div/div[2]/div/form/div[2]/div/div/input");
+    private final By submitBt= By.xpath("/html/body/div[5]/div/div/div[2]/div/form/button");
+    // --------------------- Type Filtration ---------------------
     //--------------------- new actions in discover page ---------------------
-    public DiscoverPage clickDiscoverBtn(){
+    public DiscoverPage clickDiscoverBtn() {
         findElementPresence(driver, discoverPageBtn).click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return new  DiscoverPage(driver);
+        return new DiscoverPage(driver);
     }
+
     // --------------------- old actions in homePage ---------------------
-    public HomePage clickTypeOfBuilding(){
-findElementPresence(driver, typeOfBuildingBtn).click();
+    public HomePage enterEmail() {
+        findElementPresence(driver, emailInput).sendKeys("client20@gmail.com");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return this;
+
+
+    }
+
+    public HomePage enterPassword() {
+        findElementPresence(driver, passwordInput).sendKeys("password");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return this;
+
+
+    }
+    public HomePage clickSubmitBtn() {
+        findElementPresence(driver, submitBt).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return this;
+
+    }
+
+    public HomePage clickLoginBtn() {
+        findElementPresence(driver, loginBtn).click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return  this;
+        return this;
+
     }
-    public HomePage clickServicedApartment(){
+
+    public HomePage clickTypeOfBuilding() {
+        findElementPresence(driver, typeOfBuildingBtn).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return this;
+    }
+
+    public HomePage clickServicedApartment() {
         findElementPresence(driver, servicedApartment).click();
         try {
             Thread.sleep(5000);
@@ -65,39 +120,46 @@ findElementPresence(driver, typeOfBuildingBtn).click();
         }
         return this;
     }
-    public HomePage clickTriplexBtn(){
+
+    public HomePage clickTriplexBtn() {
         findElementPresence(driver, triplexBtn).click();
         return this;
     }
-    public HomePage clickDuplexBtn(){
+
+    public HomePage clickDuplexBtn() {
         findElementPresence(driver, duplexBtn).click();
         return this;
     }
-    public HomePage clickApartmentBtn(){
+
+    public HomePage clickApartmentBtn() {
         findElementPresence(driver, apartmentBtn).click();
         return this;
     }
-    public HomePage clickStandAlonVillaBtn(){
+
+    public HomePage clickStandAlonVillaBtn() {
         findElementPresence(driver, standAlonVillaBtn).click();
         return this;
     }
-    public HomePage clickApplyType(){
+
+    public HomePage clickApplyType() {
         findElementPresence(driver, applyTypeBtn).click();
         return this;
     }
-// --------------------- price Filtration in homePage ---------------------
-    public HomePage clickPriceBtn(){
+
+    // --------------------- price Filtration in homePage ---------------------
+    public HomePage clickPriceBtn() {
         findElementPresence(driver, priceBtn).click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return  this;
+        return this;
     }
-    public HomePage choosingPrice(String minPrice , String maxPrice){
-        findElementPresence(driver,minPriceField).sendKeys(minPrice);
-        findElementPresence(driver,maxPriceField).sendKeys(maxPrice);
+
+    public HomePage choosingPrice(String minPrice, String maxPrice) {
+        findElementPresence(driver, minPriceField).sendKeys(minPrice);
+        findElementPresence(driver, maxPriceField).sendKeys(maxPrice);
 //        Actions action = new Actions(driver);
 //        action.click(findElementPresence(driver,maxPriceField)).sendKeys(maxPrice).perform();
         try {
@@ -105,15 +167,16 @@ findElementPresence(driver, typeOfBuildingBtn).click();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        findElementPresence(driver,applyPriceBtn).click();
-       return this;
+        findElementPresence(driver, applyPriceBtn).click();
+        return this;
     }
-//    public FilterByPage clickFilterByBtn(){
+
+    //    public FilterByPage clickFilterByBtn(){
 //        findElementPresence(driver, filterByBtn).click();
 //        return new FilterByPage(driver);
 //    }
     // --------------------- search in homePage ---------------------
-    public projectListPage searchForProjectsOrUnits(String projectOrUnit){
+    public projectListPage searchForProjectsOrUnits(String projectOrUnit) {
         findElementPresence(driver, searchBar).sendKeys(projectOrUnit, Keys.ENTER);
         findElementPresence(driver, searchIconBtn).click();
         try {
