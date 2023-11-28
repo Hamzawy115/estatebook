@@ -13,13 +13,13 @@ public class FiltrationTest extends TestBase {
                 .clickApplyTypeButton();
         Assert.assertTrue(filterByType.checkBuildingType("Apartment", "Duplex"));
         try {
-            Thread.sleep(8000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
 
-/*    @Test(priority = 2)
+    @Test(priority = 2)
     public void testOfTypeFilter1() {
         var filterByType = homePage.clickDiscoverBtn()
                 .clickTypeExpend()
@@ -32,7 +32,7 @@ public class FiltrationTest extends TestBase {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
 
     @Test(priority = 3)
     public void testOfTypeFilter2() {
