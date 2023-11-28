@@ -328,6 +328,11 @@ public class DiscoverPage {
 
     public DiscoverPage clickSortButton() {
         findElementPresence(driver, sortButton).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return this;
     }
 
