@@ -42,7 +42,8 @@ public class HomePage {
     private final By loginBtn = By.xpath("/html/body/header/div/div[2]/div[1]/button");
     private final By emailInput = By.xpath("/html/body/div[5]/div/div/div[2]/div/form/div[1]/div/input");
     private final By passwordInput = By.xpath("/html/body/div[5]/div/div/div[2]/div/form/div[2]/div/div/input");
-    private final By submitBt= By.xpath("/html/body/div[5]/div/div/div[2]/div/form/button");
+    private final By submitBt = By.xpath("/html/body/div[5]/div/div/div[2]/div/form/button");
+
     // --------------------- Type Filtration ---------------------
     //--------------------- new actions in discover page ---------------------
     public DiscoverPage clickDiscoverBtn() {
@@ -79,6 +80,7 @@ public class HomePage {
 
 
     }
+
     public HomePage clickSubmitBtn() {
         findElementPresence(driver, submitBt).click();
         try {
