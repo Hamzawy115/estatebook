@@ -162,8 +162,9 @@ public class FiltrationTest extends TestBase {
             throw new RuntimeException(e);
         }
     }
+
     @Test(priority = 11)
-    public void logIn(){
+    public void logIn() {
         homePage.clickLoginBtn().enterEmail().enterPassword().clickSubmitBtn();
     }
     /*@Test(priority = 3)
