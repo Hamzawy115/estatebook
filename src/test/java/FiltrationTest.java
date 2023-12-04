@@ -167,6 +167,7 @@ public class FiltrationTest extends TestBase {
     public void logIn() {
         homePage.clickLoginBtn().enterEmail().enterPassword().clickSubmitBtn();
     }
+
     /*@Test(priority = 3)
     public void testOfAreaFilter() {
         var filterByPrice = homePage.clickDiscoverBtn()
@@ -176,4 +177,50 @@ public class FiltrationTest extends TestBase {
                 .clickApplyAreaButton();
         //Assert.assertTrue(filterByPrice.checkAreaOfBuilding("100", "500"));
     }*/
+    @Test(priority = 12)
+
+    public void testOfProjectPrice() {
+        var filterByPrice = homePage.clickDiscoverBtn()
+                .clickProjectTab()
+                .clickPriceExpend()
+                .enterMinAndMaxPrice("1000000", "20000000")
+                .clickApplyPriceButton();
+        Assert.assertTrue(filterByPrice.checkPriceOfProject("1000000", "20000000"));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test(priority = 13)
+    public void checkDataOfDrawer() {
+        var filterByStartingPrice = homePage.clickDiscoverBtn()
+                .clickProjectTab()
+                .clickPriceExpend()
+                .enterMinAndMaxPrice("1000000", "20000000")
+                .clickApplyPriceButton()
+                .openDrawerOfProject();
+        Assert.assertTrue(filterByStartingPrice.checkStartingPriceOfProject("1000000", "20000000"));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+   /* @Test(priority = 14)
+    public void checkDataOfDrawer() {
+        var filterByStartingPrice = homePage.clickDiscoverBtn()
+                .clickProjectTab()
+                .clickPriceExpend()
+                .enterMinAndMaxPrice("1000000", "20000000")
+                .clickApplyPriceButton();
+        Assert.assertTrue(filterByStartingPrice.checkPricingInDrawer(DiscoverPage.getTextPriceFromDrawer, 1000000, 20000000));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
 }

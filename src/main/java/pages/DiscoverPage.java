@@ -41,7 +41,14 @@ public class DiscoverPage {
     private final By sortButton = By.xpath("//button[contains(@class,'inline-flex h-full items-center     justify-')]");
     public static final By sortSelectortype = By.xpath("//div[contains(@class,'px-1 py-1 ')]");
     public static final By DownPayment = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[3]/div[1]/a/div[2]/div/div[2]/div[1]/div[1]/div[2]/div/div/p");
-
+    public static final By projectTab = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[1]/div/button[2]");
+    public static final By getProjectPrice = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[2]/div[1]/div[1]/a/div/div[2]/div[2]/p[2]");
+    public static final By openDrawer = By.xpath("//div[contains(@class,'swiper-slide swiper-slide-active')]//img[contains(@alt,'3 Points New Capital Project')]");
+    public static final By getStartingProjectPrice = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[2]/div[1]/div[1]/section/div/div/div/div/div/div/div[2]/div/div[2]/div[1]/div[2]/div[1]/div/span[1]");
+    public static final By getDownPaymentOfProject = By.xpath("/html/body/main/div/div[4]/div[1]/div/div[2]/div[1]/div[1]/section/div/div/div/div/div/div/div[2]/div/div[2]/div[1]/div[2]/div[2]/div/span[1]");
+    public static final By ProjectCard= By.xpath("//div[contains(@class,'swiper swiper-initialized swiper-horizontal mySwiper cardSwiper h-56')]");
+    public static final By getTextPriceFromDrawer=By.xpath("//span[@xpath]");
+    private final By closeDrawer=By.xpath("/html/body/main/div/div[4]/div[1]/div/div[2]/div[1]/div[6]/section/div/div/div/div/div/div/div[1]/div/a[2]/svg");
     // --------------------- loop on all discover list ---------------------
     public boolean checkSearchResults(By elementName, String firstInput, String secondInput) {
         boolean buildingText = false;
@@ -114,6 +121,34 @@ public class DiscoverPage {
         }
         return buildingText;
     }
+    /*public boolean checkPricingInDrawer(By elementName, int firstInput, int secondInput) {
+        boolean startingPrice = false;
+        List<WebElement> projectCards = driver.findElements(elementName);
+        for (WebElement webElement : projectCards) {
+            webElement.click();
+            WebElement startingPriceElement = driver.findElement(elementName);
+            String webElementText = startingPriceElement.getText();
+            String numericString = webElementText.replaceAll("[^\\d]", "");
+            try {
+                int webElementType = Integer.parseInt(numericString);
+                if (webElementType >= firstInput && webElementType <= secondInput) {
+                    startingPrice = true;
+                } else {
+                    startingPrice = false;
+                    break;
+                }
+            }
+
+            catch (NumberFormatException e) {
+                System.err.println("Error parsing integer: " + e.getMessage());
+                startingPrice = false;
+                break;
+            }
+            clickCloseDrawer();
+
+        }
+        return startingPrice;
+    }*/
 
     public boolean checkSearchResultsOfSortPriceLowToHigh(By elementName, int firstInput, int secondInput) {
         boolean buildingText = false;
@@ -227,6 +262,15 @@ public class DiscoverPage {
         return checkSearchResultsInt(priceOfBuildingText, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
     }
 
+    public boolean checkPriceOfProject(String fromPrice, String toPrice) {
+        return checkSearchResultsInt(getProjectPrice, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
+    }
+
+    public boolean checkStartingPriceOfProject(String fromPrice, String toPrice) {
+        return checkSearchResultsInt(getStartingProjectPrice, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
+    }
+
+
     public boolean checkDownPayment(String fromPrice, String toPrice) {
         return checkSearchResultsInt(DownPayment, Integer.parseInt(fromPrice), Integer.parseInt(toPrice));
     }
@@ -248,6 +292,29 @@ public class DiscoverPage {
 
     public DiscoverPage clickDownPayment() {
         findElementPresence(driver, downpayment).click();
+
+        return this;
+    }
+
+    public DiscoverPage clickProjectTab() {
+        findElementPresence(driver, projectTab).click();
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return this;
+    }
+
+    public DiscoverPage openDrawerOfProject() {
+        findElementPresence(driver, openDrawer).click();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return this;
     }
 
@@ -273,6 +340,10 @@ public class DiscoverPage {
 
     public DiscoverPage pickCabin() {
         pickFilterTypeOption(8).click();
+        return this;
+    }
+    public DiscoverPage clickCloseDrawer() {
+        findElementPresence(driver,closeDrawer).click();
         return this;
     }
 
